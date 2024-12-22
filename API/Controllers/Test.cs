@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Net;
+using System.Security;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -11,13 +12,13 @@ namespace API.Controllers
     [ApiController]
     public class Test : ControllerBase
     {
-        // POST api/<TestControllers>
+        // POST api/<Test>
         [HttpPost]
         public Result Post([FromBody] Models.Test value)
         {
             var res = new Result();
 
-            if (value == null || value.ChildrenId < 0 || value.IsOk < 0) 
+            if (value == null || value.ChildrenId <= 0 || value.IsOk < 0) 
             {
                 res.Status = HttpStatusCode.BadRequest;
                 res.Title = "Niepoprawne rządanie";
@@ -26,13 +27,23 @@ namespace API.Controllers
             {
                 res.Status = HttpStatusCode.InternalServerError;
                 res.Title = "Wystąpił błąd podczas przwetwarzania";
+                res.ChildrenId = value.ChildrenId.ToString();
+                res.ChildrenTitle = value.Title;
             }
             else
             {
                 res.Status = HttpStatusCode.OK;
                 res.Title = "Przetworzono poprawnie";
+                res.ChildrenId = value.ChildrenId.ToString();
+                res.ChildrenTitle = value.Title;
             }
             return res;
+        }
+
+        [HttpGet]
+        public String GetAll()
+        {
+            return "test";
         }
 
     }
