@@ -1,6 +1,5 @@
 import "./App.css";
 import { mockupData } from "./data/mockupData";
-//import { sendDataToApi } from "./services/api"; //Wykomentowanie importu, ponieważ nie jest już używany
 import { useAppState } from "./hooks/useAppState";
 import Table from "./components/Table";
 
