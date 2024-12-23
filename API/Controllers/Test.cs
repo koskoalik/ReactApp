@@ -26,7 +26,7 @@ namespace API.Controllers
             else if (value.IsOk <= 0)
             {
                 res.Status = HttpStatusCode.InternalServerError;
-                res.Title = "Wystąpił błąd podczas przwetwarzania";
+                res.Title = "Wystąpił błąd podczas przetwarzania";
                 res.ChildrenId = value.ChildrenId.ToString();
                 res.ChildrenTitle = value.Title;
             }
